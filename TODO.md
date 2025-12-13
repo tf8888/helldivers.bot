@@ -1,4 +1,24 @@
-TODO
+UPDATE DATABASE SCHEMA
+
+1. SEASON
+   -> one2many: 15min interval status that gets upserted on every update (helldivers online, total kills, etc..)
+2. EVENT
+   -> no separate attack/defend event, just event with "type"
+   -> one2many: 10min interval status (event progress, maybe also campaign stats) (same table as season?)
+
+What DATA do I want to SHOW?
+
+Homepage /: QUICK UPDATE ON CURRENT SITUATION
+--> Current status of MAP (in-game desk view)
+--> Current Events as ALERTS on top (mobile under eachtoher, tablet+ next to eachtoher and scrollable)
+--> Current campaign (number) and its stats (helldivers online, kills, missions, enemies).
+
+FORGET WAR AND STATS FOR NOW. FOCUS ON GETTING HOMEPAGE GOOD.
+
+War /war/153: HISTORIC DATA AND GRAPHS
+--> on load, animate CURRENT WAR PROGRESS upto NOW
+--> switch between WARS
+--> animate MAP using STATISTICS like in-game
 
 1. Responsive Mobile Menu (go peek at Bolckmans?)
    basically: {width > 780px ? <DesktopMenu /> : <MobileMenu /> }
@@ -43,9 +63,7 @@ ultrawide? but supports ultrawide displays and goes WIIIDE. that would be super 
 
 - fill out hero content with actual interactive content. hovering over alerts should highlight related map section.
 - fill out about/features (link to github issues in about).
-
     - about
-
         - photoshop me in a helldiver helmet maybe?
         - who am I, why did I built this. Started as a discord bot, ended up as a website.
 

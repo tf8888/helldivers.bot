@@ -3,7 +3,7 @@ services:
     container_name: helldivers1api
     init: true # replaces manually installing and using tini in the docker file.
     restart: unless-stopped
-    image: ghcr.io/elfensky/helldivers1api:staging
+    image: ghcr.io/elfensky/helldiversbot:staging
     ports:
       - "127.0.0.1:58102:3000" #security update, from '58102:3000'
     env_file:

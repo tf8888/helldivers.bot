@@ -117,14 +117,14 @@ When using the docker container, the database you are connecting to needs to alr
 
 #### Build locally
 
-- Use `docker build -t ghcr.io/elfensky/helldivers1api:staging .` to build the image locally for local hardware
-  <!-- - Use `docker build --platform linux/amd64 -t ghcr.io/elfensky/helldivers1api:staging .`  -->
-- Use `docker buildx build --platform linux/amd64 -t ghcr.io/elfensky/helldivers1api:staging .` to build the image for standard x86_64 hardware
+- Use `docker build -t ghcr.io/elfensky/helldiversbot:staging .` to build the image locally for local hardware
+    <!-- - Use `docker build --platform linux/amd64 -t ghcr.io/elfensky/helldiversbot:staging .`  -->
+- Use `docker buildx build --platform linux/amd64 -t ghcr.io/elfensky/helldiversbot:staging .` to build the image for standard x86_64 hardware
 - Use `docker compose up` to run the container locally.
 
 #### Deploy to ghcr.io
 
-- Manually | Use `docker push ghcr.io/elfensky/helldivers1api:staging` to push the image to ghcr.io
+- Manually | Use `docker push ghcr.io/elfensky/helldiversbot:staging` to push the image to ghcr.io
 - Automatically | On every normal commit, Github Actions will generate a new `:staging` image
 - Automatically | On every tagged commit, Github Actions will generate a new `:production` image alongside and create a new Release (using Release.md)
 

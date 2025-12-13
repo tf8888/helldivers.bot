@@ -11,6 +11,7 @@ A Next.js application that consumes the official Helldivers 1 API, caches and re
 ## Development Commands
 
 ### Local Development
+
 ```bash
 npm install              # Install dependencies
 npm run dev             # Start dev server with Turbopack
@@ -20,23 +21,25 @@ npm run format          # Auto-format code with Prettier (watch mode)
 ```
 
 ### Docker
+
 ```bash
 # Build locally (native architecture)
-docker build -t ghcr.io/elfensky/helldivers1api:staging .
+docker build -t ghcr.io/elfensky/helldiversbot:staging .
 
 # Build for x86_64/amd64 (production deployment)
-docker buildx build --platform linux/amd64 -t ghcr.io/elfensky/helldivers1api:staging .
+docker buildx build --platform linux/amd64 -t ghcr.io/elfensky/helldiversbot:staging .
 
 # Run locally
 docker compose up
 
 # Push to registry
-docker push ghcr.io/elfensky/helldivers1api:staging
+docker push ghcr.io/elfensky/helldiversbot:staging
 ```
 
 **Important:** Database must exist before running the Docker container - it will NOT create it.
 
 ### Prisma
+
 ```bash
 npx prisma generate          # Generate Prisma Client from schema
 npx prisma migrate dev       # Create and apply migration (recommended for development)
@@ -64,17 +67,19 @@ The worker (`public/workers/cron.js`) continuously fetches current campaign data
 ### Data Flow: Fetch → Validate → Store
 
 **Two-Table Strategy:**
+
 - **Rebroadcast tables** (`rebroadcast_status`, `rebroadcast_snapshot`) - Store raw JSON from official API
 - **H1 tables** (`h1_season`, `h1_campaign`, `h1_event`, etc.) - Normalized, historical data
 
 **Update Process (src/update/status.mjs):**
+
 1. Fetch from official Helldivers API
 2. Validate with Zod schemas (`src/validators/`)
 3. Extract season number
 4. Upsert to `rebroadcast_status` (raw JSON)
 5. Upsert to normalized tables:
-   - `h1_season` (create if missing, `last_updated` initially null)
-   - `h1_campaign`, `h1_defend_event`, `h1_attack_event`, `h1_statistic` (parallel upserts)
+    - `h1_season` (create if missing, `last_updated` initially null)
+    - `h1_campaign`, `h1_defend_event`, `h1_attack_event`, `h1_statistic` (parallel upserts)
 6. Confirm success by updating `h1_season.last_updated`
 
 **Season Snapshots (src/update/season.mjs):** Similar flow for historical season data.
@@ -84,6 +89,7 @@ The worker (`public/workers/cron.js`) continuously fetches current campaign data
 **Season-Centric Model:** All game data links to `h1_season` via the `season` integer field.
 
 **Key Relationships:**
+
 - `h1_season` has one-to-one: `h1_introduction_order`, `h1_points_max`
 - `h1_season` has one-to-many: `h1_campaign`, `h1_snapshot`, `h1_defend_event`, `h1_attack_event`, `h1_event`, `h1_statistic`
 
@@ -94,6 +100,7 @@ The worker (`public/workers/cron.js`) continuously fetches current campaign data
 ### API Endpoints
 
 **Core Endpoints:**
+
 - `GET /api/h1/update?key=...` - Internal endpoint triggered by worker to update current campaign
 - `POST /api/h1/rebroadcast` - Mirrors official API (actions: `get_campaign_status`, `get_snapshots`)
 - `GET /api/h1/campaign?season=N` - Custom endpoint combining status + snapshot in single query
@@ -133,6 +140,7 @@ src/
 ### Environment Variables
 
 Required variables (see `.example.env`):
+
 - `POSTGRES_URL` - PostgreSQL connection string
 - `UPDATE_KEY` - Secret key for `/api/h1/update` endpoint
 - `UPDATE_INTERVAL` - Polling interval in seconds (e.g., "20")
@@ -143,12 +151,14 @@ Required variables (see `.example.env`):
 - `UMAMI_*` - Analytics (optional)
 
 **Connection String Differences:**
+
 - Local: `postgresql://user:pass@127.0.0.1:5432/dbname`
 - Docker: `postgresql://user:pass@host.docker.internal:5432/dbname`
 
 ## Deployment
 
 **GitHub Actions:**
+
 - Every commit → builds `:staging` image
 - Tagged commits → builds `:production` + creates GitHub Release
 
