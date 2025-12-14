@@ -83,6 +83,12 @@ async function runMigrations() {
 export async function initializeDatabase() {
     'use server';
     if (process.env.NEXT_RUNTIME === 'nodejs') {
+        // Skip migrations if SKIP_MIGRATIONS=true (e.g., when using separate migrate container)
+        if (process.env.SKIP_MIGRATIONS === 'true') {
+            console.info('DATABASE - skipping migrations (SKIP_MIGRATIONS=true)');
+            return true;
+        }
+
         //1. get the provider type
         const { data: provider, error: providerError } =
             await tryCatch(getPrismaProvider());

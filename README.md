@@ -117,8 +117,12 @@ When using the docker container, the database you are connecting to needs to alr
 
 #### Build locally
 
+docker build -f ./Dockerfile.migrate -t ghcr.io/elfensky/helldiversbot-migrate:staging .
+docker build -f ./Dockerfile.app -t ghcr.io/elfensky/helldiversbot:staging .
+--no-cache --progress=plain
+
 - Use `docker build -t ghcr.io/elfensky/helldiversbot:staging .` to build the image locally for local hardware
-    <!-- - Use `docker build --platform linux/amd64 -t ghcr.io/elfensky/helldiversbot:staging .`  -->
+  <!-- - Use `docker build --platform linux/amd64 -t ghcr.io/elfensky/helldiversbot:staging .` -->
 - Use `docker buildx build --platform linux/amd64 -t ghcr.io/elfensky/helldiversbot:staging .` to build the image for standard x86_64 hardware
 - Use `docker compose up` to run the container locally.
 
