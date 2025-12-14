@@ -15,7 +15,7 @@ export default function Galaxy({ data, rebroadcast }) {
 
     processCampaigns(data);
     processDefendEvents(data);
-    processAttackEvents(data);
+    // processAttackEvents(data);
 
     const elapsedTime = elapsedSeasonTime(data?.statistics[0]?.season_duration);
 
@@ -49,7 +49,6 @@ function processCampaigns(data) {
         const sectors_earned = Math.trunc(points / points_per_sector);
         const sectors_in_progress = sectors_earned + 1;
         const sectors_remaining = sector_count - sectors_earned - 1;
-
         if (campaign.status === 'active') {
             for (const region in map[faction]) {
                 const total_points_for_sector = region * points_per_sector;
@@ -115,9 +114,11 @@ function processCampaigns(data) {
 function processDefendEvents(data) {
     if (data?.defend_events?.length > 0) {
         data?.defend_events?.forEach((event) => {
-            if (event?.region === 0) {
-                map[3][0].event = 'active';
-                map[3][0].status = 'active';
+            if (event?.region === 0 ) {
+                if(event?.status === 'active') {
+                    map[3][0].event = 'active';
+                    map[3][0].status = 'active';
+                } 
             } else if (event?.region) {
                 if (event?.status === 'active') {
                     map[event?.enemy][event?.region].event = 'active';
@@ -132,15 +133,17 @@ function processDefendEvents(data) {
 }
 
 function processAttackEvents(data) {
+    
     if (data?.attack_events?.length > 0) {
         data?.attack_events?.forEach((event) => {
             if (event?.status === 'active') {
+
                 map[event?.enemy][11].percent = (event?.points / event?.points_max) * 100;
                 map[event?.enemy][11].points = event?.points;
                 map[event?.enemy][11].points_max = event?.points_max;
                 // map[event?.enemy][11].points_sector = event?.points;
                 // map[event?.enemy][11].points_sector_max = event?.points_max;
-                map[event?.enemy][11].status = 'in_progress';
+                map[event?.enemy][11].status = 'in_progress active';
                 map[event?.enemy][11].event = event;
             }
             if (event?.status === 'success') {

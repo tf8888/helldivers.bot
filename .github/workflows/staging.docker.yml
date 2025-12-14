@@ -102,4 +102,4 @@ jobs:
                   image-names: "helldiversbot helldiversbot-migrate"
                   tag-selection: untagged
                   cut-off: 30min
-                  dry-run: true
+                  dry-run: false

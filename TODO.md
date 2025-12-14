@@ -1,17 +1,32 @@
 What DATA do I want to SHOW?
 
-move migrations to a separate docker image that runs once and quits
-
 Homepage /: QUICK UPDATE ON CURRENT SITUATION
 --> Current status of MAP (in-game desk view)
 --> Current Events as ALERTS on top (mobile under eachtoher, tablet+ next to eachtoher and scrollable)
 --> Current campaign (number) and its stats (helldivers online, kills, missions, enemies).
-
 --> use WebSockets to push updates to the page, keeping the data up2date.
 --> use Notifications for "offline" alerts about in-game events.
 
 Generate map-data on update, and store it in a h1_map JSON field.
 then, the map component and websockets simply poll the latest map field in h1_app table
+
+- Completely rework the website layout and structure
+    - Add Active component
+    - Update Navigation with Github links and umami event tracking
+    - Update HomePage to say more about the project (actual landing page)
+        - Features
+        - About
+        - Roadmap
+    - Update Footer to have a proper sitemap, legal and donate links.
+    - Move the detailed map a new /campaign page
+    - Move stats to the /stats page
+
+- Add Mobile Navigation
+- Add JSON LD to Event component
+- Add robots.txt
+- Add sitemap.js to generate sitemap.xml
+- Update Umami tracking to only run in production.
+- Remove NodeMailer and email/password login from auth.
 
 FORGET WAR AND STATS FOR NOW. FOCUS ON GETTING HOMEPAGE GOOD.
 
@@ -19,7 +34,6 @@ FORGET WAR AND STATS FOR NOW. FOCUS ON GETTING HOMEPAGE GOOD.
 .
 .
 .
-
 .
 UPDATE DATABASE SCHEMA
 

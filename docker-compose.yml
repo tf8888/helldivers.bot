@@ -1,9 +1,6 @@
 services:
   migrate:
     container_name: helldiversbot-migrate
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile.migrate
     image: ghcr.io/elfensky/helldiversbot-migrate:staging
     env_file:
       - .docker.env

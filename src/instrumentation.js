@@ -26,12 +26,13 @@ async function initializeHelldivers1Api() {
         console.info('instrumentation.js | openapi: ', openapi);
 
         // DATABASE - check if connceted, run migrations and generate empty seasons
-        const database = await initializeDatabase();
-        if (!database) {
-            console.error('instrumentation.js | database: ', database);
-            process.exit(1);
-        }
-        console.info('instrumentation.js | database: ', database);
+        // THIS IS NO LONGER NECCESARY, INITIALIZATION & MIGRATIONS ARE HANDLED IN A SEPARATE CONTAINER THAT RUNS ONCE
+        // const database = await initializeDatabase();
+        // if (!database) {
+        //     console.error('instrumentation.js | database: ', database);
+        //     process.exit(1);
+        // }
+        // console.info('instrumentation.js | database: ', database);
 
         // WORKER - continiously update current campaign from the official Helldivers API
         const worker = await initializeWorker();
