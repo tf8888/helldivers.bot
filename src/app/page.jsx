@@ -3,6 +3,7 @@ import './page.css';
 import { tryCatch } from '@/utils/tryCatch.mjs';
 import { queryGetRebroadcastStatus } from '@/db/queries/rebroadcast';
 import { getCampaign } from '@/db/queries/getCampaign';
+
 //nextjs
 // import Script from 'next/script';
 // import Image from 'next/image';
@@ -16,6 +17,10 @@ import Galaxy from '@/components/h1/Galaxy/Galaxy';
 // import Active from '@/components/h1/Active/Active';
 import Alerts from '@/components/h1/Alerts/Alerts';
 import { formatNumber, addOrdinalSuffix } from '@/utils/utils';
+
+
+// Force dynamic rendering - skip build-time evaluation (requires database)
+export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
     const rebroacast_status = await tryCatch(queryGetRebroadcastStatus());

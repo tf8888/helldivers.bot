@@ -34,6 +34,7 @@ model App {
     version       String
     // is_db_initialized Boolean @default(false)
     active_season Int    @default(0)
+    map           Json? 
     // last_updated_status  DateTime
     // last_updated_season  DateTime
     // settings Json

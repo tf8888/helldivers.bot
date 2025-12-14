@@ -1,3 +1,26 @@
+What DATA do I want to SHOW?
+
+move migrations to a separate docker image that runs once and quits
+
+Homepage /: QUICK UPDATE ON CURRENT SITUATION
+--> Current status of MAP (in-game desk view)
+--> Current Events as ALERTS on top (mobile under eachtoher, tablet+ next to eachtoher and scrollable)
+--> Current campaign (number) and its stats (helldivers online, kills, missions, enemies).
+
+--> use WebSockets to push updates to the page, keeping the data up2date.
+--> use Notifications for "offline" alerts about in-game events.
+
+Generate map-data on update, and store it in a h1_map JSON field.
+then, the map component and websockets simply poll the latest map field in h1_app table
+
+FORGET WAR AND STATS FOR NOW. FOCUS ON GETTING HOMEPAGE GOOD.
+
+.
+.
+.
+.
+
+.
 UPDATE DATABASE SCHEMA
 
 1. SEASON
@@ -5,15 +28,6 @@ UPDATE DATABASE SCHEMA
 2. EVENT
    -> no separate attack/defend event, just event with "type"
    -> one2many: 10min interval status (event progress, maybe also campaign stats) (same table as season?)
-
-What DATA do I want to SHOW?
-
-Homepage /: QUICK UPDATE ON CURRENT SITUATION
---> Current status of MAP (in-game desk view)
---> Current Events as ALERTS on top (mobile under eachtoher, tablet+ next to eachtoher and scrollable)
---> Current campaign (number) and its stats (helldivers online, kills, missions, enemies).
-
-FORGET WAR AND STATS FOR NOW. FOCUS ON GETTING HOMEPAGE GOOD.
 
 War /war/153: HISTORIC DATA AND GRAPHS
 --> on load, animate CURRENT WAR PROGRESS upto NOW

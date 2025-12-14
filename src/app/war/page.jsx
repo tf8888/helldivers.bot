@@ -3,6 +3,10 @@ import './war.css';
 import { tryCatch } from '@/utils/tryCatch.mjs';
 import { queryGetRebroadcastStatus } from '@/db/queries/rebroadcast';
 import { getCampaign } from '@/db/queries/getCampaign';
+
+// Force dynamic rendering - skip build-time evaluation (requires database)
+export const dynamic = 'force-dynamic';
+
 //components
 import Galaxy from '@/components/h1/Galaxy/Galaxy';
 import War from '@/components/h1/War/War';

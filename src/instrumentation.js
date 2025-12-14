@@ -5,7 +5,7 @@ import { initializeWorker } from '@/utils/initialize.worker';
 import { tryCatch } from '@/utils/tryCatch';
 
 async function initializeHelldivers1Api() {
-    'use server';
+    'use server';    
     if (process.env.NEXT_RUNTIME === 'nodejs') {
         //ENVIRONMENT - are the required .env variables present and set
         const { data: env, error: envError } = await tryCatch(
